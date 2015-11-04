@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage
+END
+MKAnnotationView+WebCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/MKAnnotationView+WebCache.h
+END
+SDImageCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDImageCache.h
+END
+SDWebImageDecoder.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageDecoder.h
+END
+MKAnnotationView+WebCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/MKAnnotationView+WebCache.m
+END
+SDImageCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDImageCache.m
+END
+SDWebImageDecoder.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageDecoder.m
+END
+SDWebImageManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageManager.h
+END
+UIButton+WebCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIButton+WebCache.h
+END
+SDWebImageManager.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageManager.m
+END
+SDWebImageDownloaderOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageDownloaderOperation.h
+END
+UIImageView+WebCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImageView+WebCache.h
+END
+UIImage+WebP.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImage+WebP.h
+END
+UIButton+WebCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIButton+WebCache.m
+END
+SDWebImageDownloaderOperation.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageDownloaderOperation.m
+END
+UIImageView+WebCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImageView+WebCache.m
+END
+UIImage+WebP.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImage+WebP.m
+END
+NSData+ImageContentType.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/NSData+ImageContentType.h
+END
+SDWebImageDownloader.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageDownloader.h
+END
+UIView+WebCacheOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIView+WebCacheOperation.h
+END
+NSData+ImageContentType.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/NSData+ImageContentType.m
+END
+SDWebImageDownloader.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageDownloader.m
+END
+UIView+WebCacheOperation.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIView+WebCacheOperation.m
+END
+UIImageView+HighlightedWebCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImageView+HighlightedWebCache.h
+END
+SDWebImageCompat.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageCompat.h
+END
+UIImageView+HighlightedWebCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImageView+HighlightedWebCache.m
+END
+UIImage+MultiFormat.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImage+MultiFormat.h
+END
+SDWebImagePrefetcher.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImagePrefetcher.h
+END
+SDWebImageCompat.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageCompat.m
+END
+UIImage+GIF.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImage+GIF.h
+END
+UIImage+MultiFormat.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImage+MultiFormat.m
+END
+SDWebImagePrefetcher.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImagePrefetcher.m
+END
+UIImage+GIF.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/UIImage+GIF.m
+END
+SDWebImageOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/Running/!svn/ver/156/IOS/RunningApp2/Running/Vendor/SDWebImage/SDWebImageOperation.h
+END

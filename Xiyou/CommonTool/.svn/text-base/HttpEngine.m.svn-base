@@ -1,0 +1,379 @@
+//
+//  HttpEngine.m
+//  Running
+//
+//  Created by libokeji on 15/8/4.
+//  Copyright (c) 2015年  力波科技. All rights reserved.
+//
+
+#import "HttpEngine.h"
+
+//static NSString *baseUrl = @"http://192.168.1.104:8080/Running/entry/";
+static NSString *baseUrl = @"http://120.26.205.144:8080/Running/entry/";
+//static NSString *baseUrl = @"http://192.168.0.109:8080/Running/entry/";
+@implementation HttpEngine
+
++ (NSString *)dictionaryToJson:(NSDictionary *)dic{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    return [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+
+//版本更新
++ (void)checkVersionStrId:(NSString *)strId WithCompletion:(void(^)(NSDictionary *dic))block{
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@loadVersion",baseUrl]];
+    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url cachePolicy:0 timeoutInterval:10];
+    NSString *type = @"1";
+    NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:strId,@"id",type,@"type", nil];
+    NSString *strRequest=[NSString stringWithFormat:@"params=%@",[self dictionaryToJson:dic]];
+     NSLog(@"%@",strRequest);
+    NSData *bodydata=[strRequest dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:bodydata];
+    [request setHTTPMethod:@"POST"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (connectionError)
+        {
+            
+//            [self netLinkAlert];
+            return ;
+        }
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"dict=%@",dic);
+        block(dic);
+        
+    }];
+    
+}
+//获取验证码
++ (void)receiveCodeWithMoble:(NSString *)mobile WithComplete:(void(^)(NSDictionary *dic))block
+{
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@getCode",baseUrl]];
+    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url cachePolicy:0 timeoutInterval:10];
+    NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:mobile,@"mobile", nil];
+    NSString *strRequest=[NSString stringWithFormat:@"params=%@",[self dictionaryToJson:dic]];
+    NSData *bodydata=[strRequest dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:bodydata];
+    [request setHTTPMethod:@"POST"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        
+        if (connectionError)
+        {
+            
+//            [self netLinkAlert];
+            return ;
+        }
+        NSString *str=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",str);
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        block(dic);
+    }];
+    
+}
+//注册
++(void)submitRegisterMessageWithMobile:(NSString *)mobile withCode:(NSString *)code withSessionId:(NSString *)sessionId withName:(NSString *)name withPsd:(NSString *)pass WithComplete:(void(^)(NSDictionary *dic))block
+{
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@register",baseUrl]];
+    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url cachePolicy:0 timeoutInterval:10];
+    NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:sessionId,@"sessionId",mobile,@"mobile",code,@"code",name,@"name",pass,@"pass", nil];
+    NSString *strRequest=[NSString stringWithFormat:@"params=%@",[self dictionaryToJson:dic]];
+    NSData *bodydata=[strRequest dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:bodydata];
+    [request setHTTPMethod:@"POST"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        
+        if (connectionError)
+        {
+            
+            
+            return ;
+        }
+        NSString *str=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",str);
+        
+        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        block(dict);
+//        MainModel *model=[[MainModel alloc]initWithDictionary:dict];
+        
+        
+    }];
+}
+//登录
++ (void)LoginWithMoble:(NSString *)mobile WithPass:(NSString *)pass WithComplete:(void(^)(NSDictionary *dic))block
+{
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@entryList",baseUrl]];
+    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url cachePolicy:0 timeoutInterval:10];
+    NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:mobile,@"mobile",pass,@"pass",nil];
+    NSString *strRequest=[NSString stringWithFormat:@"params=%@",[self dictionaryToJson:dic]];
+    NSData *bodydata=[strRequest dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:bodydata];
+    [request setHTTPMethod:@"POST"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        
+        if (connectionError)
+        {
+            
+            //            [self netLinkAlert];
+            return ;
+        }
+        NSString *str=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",str);
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        block(dic);
+    }];
+ 
+    
+}
+//忘记密码
++(void)LosePswWithMobile:(NSString *)mobile withCode:(NSString *)code withSessionId:(NSString *)sessionId WithComplete:(void(^)(NSDictionary *dic))block;
+{
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@entryList",baseUrl]];
+    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url cachePolicy:0 timeoutInterval:10];
+    NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:mobile,@"mobile",code,@"code",sessionId,@"sessionId",nil];
+    NSString *strRequest=[NSString stringWithFormat:@"params=%@",[self dictionaryToJson:dic]];
+    NSData *bodydata=[strRequest dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:bodydata];
+    [request setHTTPMethod:@"POST"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        
+        
+        if (connectionError)
+        {
+            
+            //            [self netLinkAlert];
+            return ;
+        }
+        NSString *str=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",str);
+        NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        block(dic);
+    }];
+
+    
+}
+
+#pragma mark---查看个人资料
++ (void)requestPersonDetailWithId:(NSString *)uid WithMobile:(NSString *)mobile WithComplete:(void (^)(NSDictionary *dic))block{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@selectFriends",baseUrl];
+    NSDictionary *dic = @{@"id":uid,@"mobile":mobile};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        MainModel *model = [[MainModel alloc]initWithDictinary:responseObject];
+        NSMutableArray *RunFriendArr = [[NSMutableArray alloc]init];
+        for (int i = 0;i<model.json.count; i++) {
+            DataModel *dModel = [[DataModel alloc]initWithDictionary:[model.json objectAtIndex:i]];
+            [RunFriendArr addObject:dModel];
+        }
+        block(dic);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+    
+}
+#pragma mark---获得动态圈列表
++ (void)requestDynamicListWIthType:(NSString *)type WithCity:(NSString *)cityName WithBeginAge:(NSString *)beginAge WithEndAge:(NSString *)endAge WithSex:(NSString *)sex WithLabel:(NSString *)label WithUid:(NSString *)uid WithId:(NSString *)xid WithLimit:(NSString *)limit WithComplete:(void(^)(NSArray *dynamicArr))block{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@selectDynamic",baseUrl];
+    NSDictionary *dic = @{@"type":type,@"city":cityName,@"beginAge":beginAge,@"endAge":endAge,@"sex":sex,@"label":label,@"uid":uid,@"id":xid,@"limit":limit};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        MainModel *model = [[MainModel alloc]initWithDictinary:responseObject];
+        NSMutableArray *dynamicArr = [[NSMutableArray alloc]init];
+        for (int i = 0;i<model.json.count; i++) {
+            DataModel *dModel = [[DataModel alloc]initWithDictionary:[model.json objectAtIndex:i]];
+            [dynamicArr addObject:dModel];
+        }
+        block(dynamicArr);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+    
+}
+#pragma mark---发布动态
++ (void)requestSendDynamicWithPicture:(NSString *)picStr WithContent:(NSString *)content Withtype:(NSString *)type WithUid:(NSString *)uid WithCity:(NSString *)city WithComplete:(void (^)(NSDictionary *dic))block{
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@saveDynamic",baseUrl];
+    NSDictionary *dic = @{@"picture":picStr,@"content":content,@"type":type,@"uid":uid,@"city":city};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        block(dic);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+    
+}
+
+#pragma mark---点赞
++ (void)requestSavePraiseWithUid:(NSString *)uid WithCid:(NSString *)cid WithDid:(NSString *)did WithType:(NSString *)type WithComplete:(void (^)(NSDictionary *dic))block{
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@saveDynamic",baseUrl];
+    NSDictionary *dic = @{@"uid":uid,@"cid":cid,@"did":did,@"type":type};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        block(dic);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+}
+
+#pragma mark---取消点赞
++ (void)requestdeletePraiseWithUid:(NSString *)uid WithCid:(NSString *)cid WithDid:(NSString *)did WithType:(NSString *)type WithComplete:(void (^)(NSDictionary *dic))block{
+    
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@deletePraise",baseUrl];
+    NSDictionary *dic = @{@"uid":uid,@"cid":cid,@"did":did,@"type":type};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        block(dic);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+    
+}
+
+#pragma mark---评论
++ (void)requestSaveCommentWithUid:(NSString *)uid WithCid:(NSString *)cid WithDid:(NSString *)did WithContent:(NSString *)content WithType:(NSString *)type WithComplete:(void (^)(NSDictionary *dic))block{
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@saveComment",baseUrl];
+    NSDictionary *dic = @{@"uid":uid,@"cid":cid,@"did":did,@"content":content,@"type":type};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        block(dic);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+}
+
+#pragma mark---删除评论
++ (void)requestDeleteCommentWithId:(NSString *)xid WithComplete:(void (^)(NSDictionary *dic))block{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@deleteComment",baseUrl];
+    NSDictionary *dic = @{@"id":xid};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        block(dic);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+    
+}
+#pragma mark---查找系统图片
++ (void)requestDynamicPictureWithComplete:(void (^)(NSDictionary *dic))block{
+    
+    AFHTTPRequestOperationManager *manger = [[AFHTTPRequestOperationManager alloc]init];
+    manger.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSString *url = [NSString stringWithFormat:@"%@selectDyPicture",baseUrl];
+    [manger GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic = responseObject;
+        block(dic);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+    }];
+    
+}
+
+#pragma mark---聊天接口
+
+#pragma mark---跑友通讯录
++ (void)requestRunFriendWithUid:(NSString *)uid WithType:(NSString *)type WithLimite:(NSString *)limite WithLongitude:(NSString *)longitude WithLatitude:(NSString *)latitude WithComplete:(void(^)(NSArray *RunFriendArr))block{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@selectFriends",baseUrl];
+    NSDictionary *dic = @{@"uid":uid,@"type":type,@"limite":limite,@"longitude":longitude,@"latitude":latitude};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        MainModel *model = [[MainModel alloc]initWithDictinary:responseObject];
+        NSMutableArray *RunFriendArr = [[NSMutableArray alloc]init];
+        for (int i = 0;i<model.json.count; i++) {
+            DataModel *dModel = [[DataModel alloc]initWithDictionary:[model.json objectAtIndex:i]];
+            [RunFriendArr addObject:dModel];
+        }
+        block(RunFriendArr);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+}
+
+#pragma mark---取消关注
++ (void)requestDeleteFriendsWithUid:(NSString *)uid WithCuid:(NSString *)cuid WithComplete:(void(^)(NSDictionary *dic))block{
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@deleteFriends",baseUrl];
+    NSDictionary *dic = @{@"uid":uid,@"cuid":cuid};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        block(dic);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+    
+}
+
+
+#pragma mark---关注
++ (void)requestSaveFriendsWithUid:(NSString *)uid WithCuid:(NSString *)cuid WithComplete:(void(^)(NSDictionary *dic))block{
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@saveFriends",baseUrl];
+    NSDictionary *dic = @{@"uid":uid,@"cuid":cuid};
+    NSString *requestStr = [self dictionaryToJson:dic];
+    NSDictionary *params = @{@"params":requestStr};
+    NSLog(@"params=%@",params);
+    [manager POST:requestUrl parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        block(dic);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error");
+    }];
+    
+}
+
+
+
+@end
